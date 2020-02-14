@@ -1,0 +1,23 @@
+{
+  "name": "pvpoke",
+  "version": "0.0.1",
+  "description": "[PvPoke.com](https://pvpoke.com) is a resource for Pokemon GO PvP that includes a battle simulator, rankings, and team building. The project’s goal is to provide tools and insights to help players build their teams, and foster the game’s community spirit by making all of the underlying code public. I hope this project can inspire new tools or benefit the existing ones that continue to enhance our enjoyment of the game.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrkn/pvpoke.git"
+  },
+  "keywords": [],
+  "author": "Nik Coughlin <nrkn.com@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nrkn/pvpoke/issues"
+  },
+  "homepage": "https://github.com/nrkn/pvpoke#readme",
+  "devDependencies": {
+    "@types/node": "^13.7.1"
+  }
+}
