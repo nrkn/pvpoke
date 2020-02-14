@@ -105,6 +105,8 @@ export var RankerMaster = ( function() {
 							// todo: what was intended here?
 							// rankObj.score = Math.pow( rankObj.scores[ 0 ] * rankObj.scores[ 1 ] )
 
+							// this is what Math.pow does with a single arg:
+							rankObj.score = NaN
 
 							// Sort moves by id
 
