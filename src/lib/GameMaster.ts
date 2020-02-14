@@ -11,18 +11,13 @@ export var GameMaster = ( function() {
 	function createInstance() {
 		var object: any = {};
 
-		object.data = {};
+		object.data = load( webRoot + "data/gamemaster.json?v=" + siteVersion )
 		object.rankings = [];
 		object.groups = [];
 		object.teamPools = [];
 		object.loadedData = 0;
 
-		load( webRoot + "data/gamemaster.json?v=" + siteVersion, function( data ) {
-			object.data = data;
-
-			// Sort Pokemon alphabetically for searching
-			object.data.pokemon.sort( ( a, b ) => ( a.speciesName > b.speciesName ) ? 1 : ( ( b.speciesName > a.speciesName ) ? -1 : 0 ) );
-		} );
+		object.data.pokemon.sort( ( a, b ) => ( a.speciesName > b.speciesName ) ? 1 : ( ( b.speciesName > a.speciesName ) ? -1 : 0 ) );
 
 		// Return a Pokemon object given species ID
 
@@ -217,12 +212,13 @@ export var GameMaster = ( function() {
 
 				console.log( file );
 
-				load( file, function( data ) {
-					object.rankings[ key ] = data;
-					object.loadedData++;
+				object.rankings[ key ] = load( file );
 
-					caller.displayRankingData( data );
-				} );
+				var data = load( file );
+				object.rankings[ key ] = data;
+				object.loadedData++;
+
+				caller.displayRankingData( data );
 			} else {
 				caller.displayRankingData( object.rankings[ key ] );
 			}
@@ -237,15 +233,12 @@ export var GameMaster = ( function() {
 			if ( !object.groups[ key ] ) {
 				var file = webRoot + "data/groups/" + group + ".json?v=" + siteVersion;
 
-				load( file, function( data ) {
+				var data = load( file )
 
-					// Sort alphabetically
+				data.sort( ( a, b ) => ( a.speciesId > b.speciesId ) ? 1 : ( ( b.speciesId > a.speciesId ) ? -1 : 0 ) );
 
-					data.sort( ( a, b ) => ( a.speciesId > b.speciesId ) ? 1 : ( ( b.speciesId > a.speciesId ) ? -1 : 0 ) );
-
-					object.groups[ key ] = data;
-					caller.quickFillGroup( data );
-				} );
+				object.groups[ key ] = data;
+				caller.quickFillGroup( data );
 			} else {
 				caller.quickFillGroup( object.groups[ key ] );
 			}
@@ -260,10 +253,9 @@ export var GameMaster = ( function() {
 			if ( !object.teamPools[ key ] ) {
 				var file = webRoot + "data/training/teams/" + cup + "/" + league + ".json?v=" + siteVersion;
 
-				load( file, function( data ) {
-					object.teamPools[ key ] = data;
-					callback( league, cup, data );
-				} );
+				var data = load( file )
+				object.teamPools[ key ] = data;
+				callback( league, cup, data );
 			} else {
 				callback( league, cup, object.teamPools[ key ] );
 			}

@@ -48,15 +48,9 @@ export var RankerMaster = ( function() {
 			// Load override data
 
 			var file = webRoot + "data/rankingoverrides.json";
-			var overrides: any[] = [];
+			var overrides: any[] = load( file )
 
-			load( file, function( data ) {
-
-				// Sort alphabetically
-
-				overrides = data;
-				console.log( "Ranking overrides loaded [" + overrides.length + "]" );
-			} );
+			console.log( "Ranking overrides loaded [" + overrides.length + "]" );
 
 			// Load existing rankings to get best movesets
 

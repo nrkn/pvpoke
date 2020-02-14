@@ -1,16 +1,12 @@
-import { readFile, writeFile } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { SaveData } from './types'
 
-export const load = ( id: string, cb: ( data: any ) => void ) => {
+export const load = ( id: string ) => {
   if ( id.includes( '?' ) ) {
     id = id.split( '?' )[ 0 ]
   }
 
-  readFile( id, 'utf8', ( err, data ) => {
-    if ( err ) throw err
-
-    cb( JSON.parse( data ) )
-  } )
+  return JSON.parse( readFileSync( id, 'utf8' ) )
 }
 
 export const save = ( saveData: SaveData ) => {
@@ -32,9 +28,7 @@ export const save = ( saveData: SaveData ) => {
 
   const path = `./data/${ cup }/${ category }/rankings-${ league }.json`
 
-  writeFile( path, data, 'utf8', err => {
-    if ( err ) throw err
-  } )
+  writeFileSync( path, data, 'utf8' )
 }
 
 const leagues = [ 1500, 2500, 10000 ]

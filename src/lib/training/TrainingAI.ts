@@ -9,12 +9,9 @@ import { TimelineAction } from "../battle/TimelineAction";
 // Load AI archetypes
 
 var file = webRoot+"data/training/aiArchetypes.json?v=1";
-var aiData: any[] = [];
+var aiData: any[] = load( file );
 
-load( file, function( data ){
-	aiData = data;
-	console.log("AI data loaded ["+aiData.length+"]");
-});
+console.log( "AI data loaded [" + aiData.length + "]" );
 
 export function TrainingAI(l, p, b){
 	var level = parseInt(l);
