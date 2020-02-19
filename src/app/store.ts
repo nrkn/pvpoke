@@ -1,12 +1,12 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { SaveData } from './types'
 
-export const load = ( id: string ) => {
+export const load = <T = any>( id: string ) => {
   if ( id.includes( '?' ) ) {
     id = id.split( '?' )[ 0 ]
   }
 
-  return JSON.parse( readFileSync( id, 'utf8' ) )
+  return JSON.parse( readFileSync( id, 'utf8' ) ) as T
 }
 
 export const save = ( saveData: SaveData ) => {
